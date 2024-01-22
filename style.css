@@ -1,5 +1,33 @@
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.calculator {
+  --calc-background: #000000;
+  --calc-font-color: #bcc8b0;
+
+  background-color: var(--calc-background);
+  color: var(--calc-font-color);
+  margin: auto;
+  width: 296px;
+  max-width: 100%;
+  padding: 12px;
+
+  .calculator-header {
+    position: relative;
+  }
+
+  .calculator-buttons {
+    display: grid;
+    grid-template-areas:
+    "clear save emmpty-1 divide"
+    "number-7 number-8 number-9 multiply"
+    "number-4 number-5 number-6 minus"
+    "number-1 number-2 number-3 plus"
+    "empty-2 number-0 empty-3 results"
+    ;
+  }
 }
