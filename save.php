@@ -5,7 +5,13 @@ $data['timestamp'] = time();
 $data['date'] = date('Y-m-d H:i:s');
 $file = fopen('data.csv', 'a');
 
-fputcsv($file, $data);
-
+if (fputcsv($file, $data)) {
+  $status = 'success';
+} else {
+  $status = 'error';
+}
 
 fclose($file);
+
+echo json_encode(['status' => $status]);
+

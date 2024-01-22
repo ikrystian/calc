@@ -32,7 +32,10 @@
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Data saved:', data);
+        const response = data.status;
+        if(response === 'success') {
+          alert('Saved successfully');
+        }
       })
       .catch(error => {
         console.error('Error saving data:', error);
@@ -80,6 +83,11 @@
   });
 
   saveButton.addEventListener('click', () => {
+    if(result.value === '') {
+      alert('You cannot save empty result');
+      return false;
+    }
+    
     save(result.value, userip);
   });
 
