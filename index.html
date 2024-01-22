@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculator</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="calculator">
-    <div class="calculator-header" >
-      <input type="text" id="display">
+    <div class="calculator-header">
+      <input type="text" disabled class="calculator-header" id="display">
+      <input type="text" disabled class="calculator-results">
     </div>
-
-    <div class="calculator-results">
-      2 048
-    </div>
-
     <div class="calculator-buttons">
-      <button type="button">C</button>
-      <button type="button">S</button>
+      <button type="button" class="clear-button">C</button>
+      <button type="button" class="save-results">S</button>
       <span></span>
-      <input type="button" value="÷">
+      <input type="button" value="÷" class="operator-button">
       <input type="button" value="7">
       <input type="button" value="8">
       <input type="button" value="9">
-      <input type="button" value="x">
+      <input type="button" value="x" class="operator-button">
       <input type="button" value="4">
       <input type="button" value="5">
       <input type="button" value="6">
-      <input type="button" value="-">
+      <input type="button" value="-" class="operator-button">
       <input type="button" value="1">
       <input type="button" value="2">
       <input type="button" value="3">
-      <input type="button" value="+">
+      <input type="button" value="+" class="operator-button">
       <span></span>
       <input type="button" value="0">
       <span></span>
-      <button type="button">=</button>
+      <button type="button" class="result-button" id="result-button">=</button>
     </div>
   </div>
-    <script src="./main.js"></script>
+  <script src="./main.js"></script>
 </body>
+
 </html>

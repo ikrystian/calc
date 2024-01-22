@@ -1,13 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline: none;
 }
 
 .calculator {
   --calc-background: #000000;
   --calc-font-color: #bcc8b0;
+  --calc-button-background: #1a1a1a;
+  --calc-button-hover-background: #353535;
+  --calc-button-result-background: #6e5948;
+  --calc-button-hover-result-background: #997c64;
+  --calc-button-result-color: #fff;
+  --calc-button-operator-color: #b8a699;
+  --calc-button-clear-color: #ca362c;
+  --calc-button-hover-clear-color: #2d1c1c;
+  --calc-button-save-color: #357599;
+  --calc-button-hover-save-background: #0f222c;
+  --calc-border-header-color: #0f0f0f;
+
 
   background-color: var(--calc-background);
   color: var(--calc-font-color);
@@ -15,19 +29,88 @@
   width: 296px;
   max-width: 100%;
   padding: 12px;
+  font-size: 36px;
+  font-family: 'Oxygen', sans-serif;
 
   .calculator-header {
-    position: relative;
+    border-bottom: 1px solid var(--calc-border-header-color);
+    margin-bottom: 26px;
+  }
+
+  input[disabled] {
+    font-size: 24px;
+    border: 0;
+    text-align: right;
+    background-color: transparent;
+    width: 100%;
+    display: block;
+    color: var(--font-color);
+    margin-bottom: 26px;
+
+    &:nth-child(1) {
+      font-size: 30px;
+    }
   }
 
   .calculator-buttons {
     display: grid;
+    gap: 10px;
     grid-template-areas:
-    "clear save emmpty-1 divide"
-    "number-7 number-8 number-9 multiply"
-    "number-4 number-5 number-6 minus"
-    "number-1 number-2 number-3 plus"
-    "empty-2 number-0 empty-3 results"
+      "clear save emmpty-1 divide"
+      "number-7 number-8 number-9 multiply"
+      "number-4 number-5 number-6 minus"
+      "number-1 number-2 number-3 plus"
+      "empty-2 number-0 empty-3 results"
     ;
+
+    input[type="button"],
+    button[type="button"] {
+      aspect-ratio: 1;
+      border: 0;
+      border-radius: 500%;
+      background-color: var(--calc-button-background);
+      font-size: 23px;
+      color: var(--calc-font-color);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oxygen', sans-serif;
+
+      &:hover {
+        background-color: var(--calc-button-hover-background);
+      }
+
+      &.result-button {
+        background-color: var(--calc-button-result-background);
+        color: var(--calc-button-result-color);
+
+        &:hover {
+          background-color: var(--calc-button-hover-result-background);
+        }
+      }
+
+      &.operator-button {
+        color: var(--calc-button-operator-color);
+      }
+
+      &.clear-button {
+        color: var(--calc-button-clear-color);
+
+        &:hover {
+          background-color: var(--calc-button-hover-clear-color);
+        }
+      }
+
+      &.save-results {
+        color: var(--calc-button-save-color);
+
+        &:hover {
+          background-color: var(--calc-button-hover-save-background);
+        }
+      }
+    }
+
+
   }
 }
