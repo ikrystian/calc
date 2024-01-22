@@ -6,7 +6,7 @@
   const clearButton = document.querySelector('#clear-button');
   const saveButton = document.querySelector('#save-button');
 
-  let toClear = false;
+  let toClear = false
 
   const display = (value) => {
     headerDisplay.value += value;
@@ -39,48 +39,38 @@
       });
   }
 
-
-
-  const handleClick = (event) => {
-    if(toClear) {
-      clear();
-      toClear = false;
-    }
-
-    const buttonValue = event.target.value;
-
-    switch (buttonValue) {
-      case '÷':
-        event.target.value = '/';
-        break;
-      case 'x':
-        event.target.value = '*';
-        break;
-      case '0':
-        handleZeroClick();
-        break;
-      default:
-        display(buttonValue);
-    }
-  }
-
-  const handleZeroClick = () => {
-    if (headerDisplay.value === '') {
-      alert('First digit of number cannot be 0 - for now, sorry');
-    }
-
-    if (headerDisplay.value.endsWith('/')) {
-      alert('Cannot divide by 0 - dude!');
-    }
-  }
-
   buttons.forEach(button => {
-    button.addEventListener('click', handleClick);
+    button.addEventListener('click', (el) => {
+      if (toClear) {
+        clear();
+        toClear = false;
+      }
+
+      if (el.target.value === '0') {
+        if (headerDisplay.value === '') {
+          alert('First digit of number cannot be 0 - for now, sorry');
+        }
+        
+        if (headerDisplay.value[headerDisplay.value.length - 1] === '/') {
+          alert('Cannot divide by 0 - dude!');
+        }
+
+        return false;
+      }
+
+      const value = el.target.value;
+      display(value);
+    })
   });
 
   resultButton.addEventListener('click', () => {
+    const lastChar = headerDisplay.value[headerDisplay.value.length - 1];
+    if (lastChar === '*' || lastChar === '/' || lastChar === '+' || lastChar === '-') {
+      alert('You cannot end equation with an operator');
+      return false;
+    }
+
     const resultValue = eval(headerDisplay.value);
-    console.log(resultValue);
     result.value = resultValue;
     toClear = true;
   });

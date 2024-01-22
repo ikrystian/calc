@@ -76,8 +76,10 @@
       align-items: center;
       justify-content: center;
       font-family: 'Oxygen', sans-serif;
-
-      &:hover {
+      transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+      
+      &:hover,
+      &:focus {
         background-color: var(--calc-button-hover-background);
       }
 
@@ -85,7 +87,8 @@
         background-color: var(--calc-button-result-background);
         color: var(--calc-button-result-color);
 
-        &:hover {
+        &:hover,
+        &:focus {
           background-color: var(--calc-button-hover-result-background);
         }
       }
@@ -97,7 +100,8 @@
       &.clear-button {
         color: var(--calc-button-clear-color);
 
-        &:hover {
+        &:hover,
+        &:focus {
           background-color: var(--calc-button-hover-clear-color);
         }
       }
@@ -105,7 +109,8 @@
       &.save-results {
         color: var(--calc-button-save-color);
 
-        &:hover {
+        &:hover,
+        &:focus {
           background-color: var(--calc-button-hover-save-background);
         }
       }
