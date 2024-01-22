@@ -5,11 +5,13 @@
   const result = document.querySelector('.calculator-results');
   const clearButton = document.querySelector('#clear-button');
   const saveButton = document.querySelector('#save-button');
-  
+
+  let toClear = false;
+
   const display = (value) => {
     headerDisplay.value += value;
   }
- 
+
   const clear = () => {
     headerDisplay.value = '';
     result.value = '';
@@ -17,8 +19,8 @@
 
   const save = (value, ip) => {
     const data = {
-        value,
-        ip
+      value,
+      ip
     };
 
     fetch('save.php', {
@@ -35,34 +37,52 @@
       .catch(error => {
         console.error('Error saving data:', error);
       });
+  }
 
+
+
+  const handleClick = (event) => {
+    if(toClear) {
+      clear();
+      toClear = false;
+    }
+
+    const buttonValue = event.target.value;
+
+    switch (buttonValue) {
+      case '÷':
+        event.target.value = '/';
+        break;
+      case 'x':
+        event.target.value = '*';
+        break;
+      case '0':
+        handleZeroClick();
+        break;
+      default:
+        display(buttonValue);
+    }
+  }
+
+  const handleZeroClick = () => {
+    if (headerDisplay.value === '') {
+      alert('First digit of number cannot be 0 - for now, sorry');
+    }
+
+    if (headerDisplay.value.endsWith('/')) {
+      alert('Cannot divide by 0 - dude!');
+    }
   }
 
   buttons.forEach(button => {
-    button.addEventListener('click', (el) => {
-      if(el.target.value === '÷') {
-        el.target.value = '/';
-      }
-
-      if(el.target.value === 'x') {
-        el.target.value = '*';
-      }
-      
-      if(el.target.value === '0' && headerDisplay.value === '') { 
-        alert('First digit of number cannot be 0 - for now, sorry');
-        return false;
-      }
-
-      const value = el.target.value;
-      display(value);
-    })
+    button.addEventListener('click', handleClick);
   });
 
   resultButton.addEventListener('click', () => {
-    
     const resultValue = eval(headerDisplay.value);
     console.log(resultValue);
     result.value = resultValue;
+    toClear = true;
   });
 
   clearButton.addEventListener('click', () => {
