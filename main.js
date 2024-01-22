@@ -40,13 +40,29 @@
 
   buttons.forEach(button => {
     button.addEventListener('click', (el) => {
+      if(el.target.value === '÷') {
+        el.target.value = '/';
+      }
+
+      if(el.target.value === 'x') {
+        el.target.value = '*';
+      }
+      
+      if(el.target.value === '0' && headerDisplay.value === '') { 
+        alert('First digit of number cannot be 0 - for now, sorry');
+        return false;
+      }
+
       const value = el.target.value;
       display(value);
     })
   });
 
   resultButton.addEventListener('click', () => {
-    result.value = Math.random() * 100;
+    
+    const resultValue = eval(headerDisplay.value);
+    console.log(resultValue);
+    result.value = resultValue;
   });
 
   clearButton.addEventListener('click', () => {
