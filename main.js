@@ -33,8 +33,9 @@
       .then(response => response.json())
       .then(data => {
         const response = data.status;
-        if(response === 'success') {
+        if (response === 'success') {
           alert('Saved successfully');
+          clear();
         }
       })
       .catch(error => {
@@ -42,27 +43,31 @@
       });
   }
 
+  const func = (el) => {
+    if (toClear) {
+      clear();
+      toClear = false;
+    }
+
+    if (el === '0') {
+      if (headerDisplay.value === '') {
+        alert('First digit of number cannot be 0 - for now, sorry');
+      }
+
+      if (headerDisplay.value[headerDisplay.value.length - 1] === '/') {
+        alert('Cannot divide by 0 - dude!');
+      }
+
+      return false;
+    }
+
+    const value = el;
+    display(value);
+  }
+
   buttons.forEach(button => {
     button.addEventListener('click', (el) => {
-      if (toClear) {
-        clear();
-        toClear = false;
-      }
-
-      if (el.target.value === '0') {
-        if (headerDisplay.value === '') {
-          alert('First digit of number cannot be 0 - for now, sorry');
-        }
-        
-        if (headerDisplay.value[headerDisplay.value.length - 1] === '/') {
-          alert('Cannot divide by 0 - dude!');
-        }
-
-        return false;
-      }
-
-      const value = el.target.value;
-      display(value);
+      func(el.target.value);
     })
   });
 
@@ -83,13 +88,28 @@
   });
 
   saveButton.addEventListener('click', () => {
-    if(result.value === '') {
+    if (result.value === '') {
       alert('You cannot save empty result');
       return false;
     }
-    
+
     save(result.value, userip);
   });
 
+  document.addEventListener('keydown', (el) => {
+    if (el.key == '0' || el.key == '1'
+      || el.key == '2' || el.key == '3'
+      || el.key == '4' || el.key == '5'
+      || el.key == '6' || el.key == '7'
+      || el.key == '8' || el.key == '9'
+      || el.key == '+' || el.key == '-'
+      || el.key == '*' || el.key == '/') {
+      func(el.key);
+    }
+
+    if (el.key === 'Enter') {
+      resultButton.click()
+    }
+  });
 
 })();
