@@ -1,18 +1,37 @@
 <?php
-$csvFile = 'data.csv';
-$data = [];
+class CsvProcessor {
+  private $csvFile;
+  private $data = [];
 
-if (($handle = fopen($csvFile, 'r')) !== false) {
-  while (($row = fgetcsv($handle)) !== false) {
-    $data[] = $row;
+  public function __construct($csvFile) {
+      $this->csvFile = $csvFile;
   }
-  fclose($handle);
+
+  public function readCsv() {
+      if (($handle = fopen($this->csvFile, 'r')) !== false) {
+          while (($row = fgetcsv($handle)) !== false) {
+              $this->data[] = $row;
+          }
+          fclose($handle);
+      }
+  }
+
+  public function sortByDate() {
+      usort($this->data, function ($a, $b) {
+          return strtotime($a[1]) - strtotime($b[1]);
+      });
+  }
+
+  public function displayData() {
+      foreach ($this->data as $row) {
+          echo implode(', ', $row) . "<br>";
+      }
+  }
 }
 
-usort($data, function ($a, $b) {
-  return strtotime($a[1]) - strtotime($b[1]);
-});
+$csvFile = 'data.csv';
+$csvProcessor = new CsvProcessor($csvFile);
 
-foreach ($data as $row) {
-  echo implode(', ', $row) . "<br>";
-}
+$csvProcessor->readCsv();
+$csvProcessor->sortByDate();
+$csvProcessor->displayData();
