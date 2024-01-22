@@ -96,20 +96,16 @@
     save(result.value, userip);
   });
 
-  document.addEventListener('keydown', (el) => {
-    if (el.key == '0' || el.key == '1'
-      || el.key == '2' || el.key == '3'
-      || el.key == '4' || el.key == '5'
-      || el.key == '6' || el.key == '7'
-      || el.key == '8' || el.key == '9'
-      || el.key == '+' || el.key == '-'
-      || el.key == '*' || el.key == '/') {
-      func(el.key);
+  document.addEventListener('keydown', (event) => {
+    const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/'];
+ 
+    if (validKeys.includes(event.key)) {
+        func(event.key);
     }
 
-    if (el.key === 'Enter') {
-      resultButton.click()
+    if (event.key === 'Enter') {
+        resultButton.click();
     }
-  });
+});
 
 })();
